@@ -11,11 +11,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Get commit messages
-      id: get_commit_messages
+    - name: Get commit details
+      id: get_commit_details
       run: |
-        git log --oneline -n 5 > commits.txt
-        echo "COMMITS=$(cat commits.txt)" >> $GITHUB_ENV
+        # Get the number of new commits
+        COMMIT_COUNT=$(git rev-list --count HEAD ^origin/master)
+        
+        # Get the commit messages, authors, and commit hash
+        git log --oneline --pretty=format:"%h %s - %an" -n $COMMIT_COUNT > commit_details.txt
+        
+        # Set environment variables for commit count and details
+        echo "COMMIT_COUNT=$COMMIT_COUNT" >> $GITHUB_ENV
+        echo "COMMIT_DETAILS=$(cat commit_details.txt)" >> $GITHUB_ENV
 
     - name: Send message to Discord
       uses: sebastianpopp/discord-action@releases/v2
@@ -23,5 +30,5 @@ jobs:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
         message: |
           ${{ github.repository }} has been successfully pushed to master.
-          Recent commits:
-          ${{ env.COMMITS }}
+          ${{ env.COMMIT_COUNT }} new commit(s):
+          ${{ env.COMMIT_DETAILS }}
