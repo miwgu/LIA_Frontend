@@ -19,7 +19,8 @@ function App() {
 
 const LoginComponent =() =>{
   const {loginFunction} = useMockLogin ();
-  return <Login loginFunction={loginFunction} />
+  const {navToPage} =useMockLogin();
+  return <Login loginFunction={loginFunction} navToPage={navToPage}/>
 } 
 
 export default App
