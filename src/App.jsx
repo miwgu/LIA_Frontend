@@ -1,16 +1,25 @@
 import { Login, NavBar } from 'fwk-22-a-components';
-//import Login  from 'fwk-22-a-components/src/components/Login/Login';
+import { MockLoginProvider, useMockLogin } from 'fwk-22-a-components';
 import './App.css'
 
 function App() {
+  
 
   return (
     <>
       <NavBar/>
-      <Login/>
+      <MockLoginProvider>
+        <LoginComponent/>
+      </MockLoginProvider>
+      
 
     </>
   )
 }
+
+const LoginComponent =() =>{
+  const {loginFunction} = useMockLogin ();
+  return <Login loginFunction={loginFunction} />
+} 
 
 export default App
