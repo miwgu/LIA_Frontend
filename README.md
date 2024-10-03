@@ -43,6 +43,13 @@ React version 18 eller högre
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## How to Login
+
+student-> 
+email: student1@example.com password:stu%1
+compny->
+email: com1@example.com password:com%1   
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
